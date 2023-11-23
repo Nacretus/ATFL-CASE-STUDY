@@ -89,6 +89,6 @@ def prediction (input_text):
 
     output = "Top 5 Predicted Conditions:\r\n"
     for i, (condition, prob) in enumerate(sorted_predictions[:5], 1):
-        output += f"{i}. Name of illness: {condition}\n Prediction Accuracy: {prob*100}%\r\n\n"
+        output += f"{i}. Name of illness: {condition}\n Prediction Accuracy: {round(prob*100, 2)}%\r\n\n"
 
     return(output)
