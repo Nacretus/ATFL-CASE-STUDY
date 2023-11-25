@@ -125,7 +125,7 @@ class gui1(ctk.CTk):
     
     def show_result(self):
         for task_id in self.after_ids:
-                self.after_cancel(task_id)
+            self.after_cancel(task_id)
         input = self.symptom_textbox.get("1.0", "end-1c")
         self.destroy()
         from gui2 import secondGUI
@@ -198,15 +198,7 @@ class gui1(ctk.CTk):
         return int(base_button_width * scaling_factor)
     
     def create_symptom_button(self, symptom, i):
-        column = i % self.columns
-        row = i // self.columns
-        if column == 5:  # Adjust the number of columns if it's a new row
-            self.columns = min(self.columns, i + 1)
-        
         def button_click_event():
-            if self.symptom_textbox.get("1.0", "1.0 lineend") == "Enter your symptoms here":
-                self.symptom_textbox.delete("1.0", "1.0 lineend")
-
             current_text = self.symptom_textbox.get("1.0", "end-1c")
             if current_text.strip() == "":
                 updated_text = symptom
@@ -219,5 +211,5 @@ class gui1(ctk.CTk):
             self.check_textbox_content(None)
 
         button = ctk.CTkButton(self.list_symptoms, text=symptom, command=button_click_event, font=ctk.CTkFont('Arial', size=12))
-        button.configure(width=self.button_width)
-        button.grid(row=i // self.columns, column=column, padx=2, pady=2, sticky="w")
+        button.configure(width=self.calculate_button_width())  # Use the function for calculating width
+        button.grid(row=i // self.columns, column=i % self.columns, padx=2, pady=2, sticky="w")
